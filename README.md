@@ -70,6 +70,7 @@ Note - We attempted to incorporate a detailed tool-tip in our visualizations but
 - Once we had coded for one statitic, we enhanced the code to cover other statistics of interest to us. We also worked on labelling, formatting and colors of our visualization.
 
 **Work Breakdown**
+
 We roughly divided the work as follows -
 
 **Aditya Kaul**
@@ -89,6 +90,7 @@ We roughly divided the work as follows -
 - Writeup
 
 **Effort Expended**
+
 Below is the approximate time we spent per person on building the interactive visualization -
 - Exploring online available datasets: 4 - 5 hours
 - Data cleaning and data preparation: 7 - 8 hours
@@ -97,6 +99,7 @@ Below is the approximate time we spent per person on building the interactive vi
 - Learning HTML, CSS, JavaScript, D3: 40 -50 hours
 
 **Challenging and Time Consuming Aspects**
+
 - Learning D3
 - Brainstorming and designing
 - Data preparation in the correct format
