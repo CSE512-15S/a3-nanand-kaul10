@@ -57,9 +57,9 @@ After much brainstorming, we decided to go with the above design for our visuali
 
 There wasn't much change between our final storyboard and our implementation. In a way, our storyboard guided our implementation. 
 
-Having said that, we did change the placement of buttons on our visualization. We also modified some of the button labels from what we had thought earlier. Another addition to our actual implementation was, including time delays between button clicks and changing the color of the selected bar in a chosen bar chart. Remaining functionality and features remained almost the same as we have envisioned.
+Having said that, we did change the placement of buttons on our visualization. We also modified some of the button labels from what we had thought earlier. Another addition to our actual implementation was, including time delays between button clicks and changing the color of the selected bar in a chosen bar chart. 
 
-Note - We attempted to incorporate a detailed tool-tip in our visualizations but, owing to our technical limitation, we found it to be a challenge.
+Note - We attempted to incorporate a tool-tip in our visualization to display team details but owing to technical limitations we couldn't implement it.
 
 # Development Process
 
@@ -93,7 +93,7 @@ We roughly divided the work as follows -
 
 Below is the approximate time we spent per person on building the interactive visualization -
 - Exploring online available datasets: 4 - 5 hours
-- Data cleaning and data preparation: 7 - 8 hours
+- Data cleaning and data preparation: 4 - 5 hours
 - Brainstorming and designing: 15 - 20 hours
 - Coding (including re-work): 15 - 20 hours
 - Learning HTML, CSS, JavaScript, D3: 40 -50 hours
