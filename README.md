@@ -104,3 +104,9 @@ Below is the approximate time we spent per person on building the interactive vi
 - Brainstorming and designing
 - Data preparation in the correct format
 - Implementing interaction features such as tool-tip
+
+**Limitation**
+- Due to technical limitations, we were not able to implement our initial idea of tooltip showing EPL team details over the bars in the charts
+
+**Reference**
+- We used 'Interactive Data Visualization for the Web' by Scott Murray as reference for our code.
