@@ -6,31 +6,30 @@
 2. Nandita Anand nanand@uw.edu
 
 # English Premier League - Team Performance Analysis for Season 2014 - 2015
-Data Domain - Barclays English Premier League is a professional football premier league for men's association football clubs. There are a total of 20 clubs associated with this division. Each team plays a total of 38 matches including 19 home fixtures and 19 away fixtures. Each year the EPL season runs from August to May. 
+**Data Domain** - Barclays English Premier League is a professional football premier league for men's association football clubs. There are a total of 20 clubs associated with this division. Each team plays a total of 38 matches including 19 home fixtures and 19 away fixtures. Each year the EPL season runs from August to May. 
 Since the EPL season is currently in progress and very much in news, it got us interested and we thought of analysing the EPL data for the ongoing season. We decided to analyse the performance statistics of each team with regards to the number of matches they won, number of matches lost, number of goals scored, and number of goals conceded which would help us compare the teams with a higher points tally and the number of goals they scored. Also, it would help us understand which teams were in the relegation zone due to poor performance and higher number of goals conceded. Another important question we wanted to answer was whether a team scoring high number of goals was among the top contenders or not.
 
-Data Set - For the purpose of this visualization we took the EPL statistics data from http://www.statto.com/football/stats/england/premier-league/2014-2015/table. It gives a tabular representation of the statistics which makes it a little hard for a casual observer to comprehend how different teams are performing individually and also with respect to others. This was also one of the motivations for us to work with this dataset and make it visually appealing and effective.
+**Data Set** - For the purpose of this visualization we took the EPL statistics data from http://www.statto.com/football/stats/england/premier-league/2014-2015/table. It gives a tabular representation of the statistics which makes it a little hard for a casual observer to comprehend how different teams are performing individually and also with respect to others. This was also one of the motivations for us to work with this dataset and make it visually appealing and effective.
 
-Data Cleaning - As the original data was in a tabular form, we couldn't use it directly in our code. Thus, we converted this data to the JSON format so that we could readily use/import it in our D3 code and create effective and interactive visualizations. 
-<Name of JSON data file - EplData.JSON>
+**Data Cleaning** - As the original data was in a tabular form, we couldn't use it directly in our code. Thus, we converted this data to the JSON format so that we could readily use/import it in our D3 code and create effective and interactive visualizations. 
 
-Interaction Techniques and Reasons - We attempted to incorporate the following interaction techniques in our visualization
+**Interaction Techniques and Reasons** - We attempted to incorporate the following interaction techniques in our visualization
 
-1. Mouse Hover
+1. **Mouse Hover**
   - We ensured that when the user would hover over the visualization, the bar over which the mouse pointer was present would turn into a different color in order to make viewing of the particular statistic easier for the user. 
   - We also introduced a transition time of 0.3 seconds to ensure smooth transitioning from one bar to another and minimize the abrupt change in color.
   - In order to refer to the value of the bars, we introduced labels at the tip of the bars which would become visible to user on hovering the mouse over the respective bar.
 
-2. Sorting via Mouse Click
+2. **Sorting via Mouse Click**
   - As an important part of our question was to figure out the top contenders for the title and the teams facing relegation, we incorporated sorting feature so that a user could sort the data/bars in either ascending or descending order and easily decipher which teams belonged to the aforementioned catergories.
   - On the 1st click within the visualization layout, the bars would get sorted in descending order.
   - On the 2nd click within the visualization layout, the bars would get sorted in ascending order.
 
-3. Selection via Buttons
+3. **Selection via Buttons**
   - In order to visualize and analyse specific statistics for each team such as goals scored, goals conceded, matches won, total points et cetera, we included buttons in our visualization. We ensured that the button labels were self-explanatory and on clicking a specific button, its corresponding statistic would be displayed.
   - We introduced a delay of 1500 ms so that the transitioning of the bars from one window to another became smooth and visually appealing.
 
-The Final Visualization - We have implemented a multi-view interactive visualization for the EPL Season 2014-2015 teams performance statistics. Users can explore different performance statisics by clicking on respective buttons in the visualization window. Within a particular statistic plot or window, users can sort the data in ascending or descending order to analyse it from varied perspectives. Users can also get the actual value of a statistic for a particular team by hovering over the corresponding bar which would not only display the value but also change the color of the bar.
+**The Final Visualization** - We have implemented a multi-view interactive visualization for the EPL Season 2014-2015 teams performance statistics. Users can explore different performance statisics by clicking on respective buttons in the visualization window. Within a particular statistic plot or window, users can sort the data in ascending or descending order to analyse it from varied perspectives. Users can also get the actual value of a statistic for a particular team by hovering over the corresponding bar which would not only display the value but also change the color of the bar.
 
 # Running Instructions
 
@@ -44,7 +43,7 @@ In order to create this interactive visualization we toyed with a couple of dist
 
 Initially we thought of taking the EPL data for all of the 20 teams and creating an interactive line chart visualization for the same. We thought of plotting the team details on the Y axis and the EPL statistics on the X axis. Depending on what statistic a user chose from a given list, the line charts would change and show relevant data.
 
-However, owing to technical limitations we decided to modify or design of the visualization.
+However, owing to technical limitations we decided to modify our visualization design.
 
 ![StoryBoard2](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_2.jpg?raw=true)
 
@@ -56,14 +55,49 @@ After much brainstorming, we decided to go with the above design for our visuali
 
 # Changes between Storyboard and the Final Implementation
 
-A paragraph explaining changes between the storyboard and the final implementation.
+There wasn't much change between our final storyboard and our implementation. In a way, our storyboard guided our implementation. 
+
+Having said that, we did change the placement of buttons on our visualization. We also modified some of the button labels from what we had thought earlier. Another addition to our actual implementation was, including time delays between button clicks and changing the color of the selected bar in a chosen bar chart. Remaining functionality and features remained almost the same as we have envisioned.
+
+Note - We attempted to incorporate a detailed tool-tip in our visualizations but, owing to our technical limitation, we found it to be a challenge.
 
 # Development Process
 
-Include:
+- As both of us didn't have significant prior experience in HTML, CSS, and JavaScript, we begun work on this assignment together by learning the basics of these technologies. We also devoted significant amount of time studying the nuances of D3.js. 
+- Then, we brainstormed and came up with our respective interest areas and found some relevant datasets. We analysed the datasets to determine what kind of visualizations we could make. 
+- After shortlisting our dataset, we cleaned and formatted the data so that we could use it in our code for visualization.
+- Following cleaning, we began coding for one statistic only. We collaborated while coding since both of us were new to this technology and needed each other's help in resolving issues that came up.
+- Once we had coded for one statitic, we enhanced the code to cover other statistics of interest to us. We also worked on labelling, formatting and colors of our visualization.
 
-Breakdown of how the work was split among the group members.
-A commentary on the development process, including answers to the following questions:
-Roughly how much time did you spend developing your application?
-What aspects took the most time?
-Challenges
+**Work Breakdown**
+We roughly divided the work as follows -
+
+**Aditya Kaul**
+- Dataset exploration
+- Interactive bar plot implementation
+- Ascending and descending sort
+
+**Nandita Anand**
+- Dataset preparation
+- Implemeting multi-view visualization using buttons
+- Colors and layout
+
+**Together**
+- Data analysis
+- Brainstorming and design
+- Implementation and integration
+- Writeup
+
+**Effort Expended**
+Below is the approximate time we spent per person on building the interactive visualization -
+- Exploring online available datasets: 4 - 5 hours
+- Data cleaning and data preparation: 7 - 8 hours
+- Brainstorming and designing: 15 - 20 hours
+- Coding (including re-work): 15 - 20 hours
+- Learning HTML, CSS, JavaScript, D3: 40 -50 hours
+
+**Challenging and Time Consuming Aspects**
+- Learning D3
+- Brainstorming and designing
+- Data preparation in the correct format
+- Implementing interaction features such as tool-tip
