@@ -37,8 +37,7 @@ Access our visualization at http://cse512-15s.github.io/a3-nanand-kaul10/ or dow
 
 In order to create this interactive visualization we toyed with a couple of distinct visualization approaches. Below are our storyboards and corresponding description -
 
-https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_1.jpg?raw=true
-
+![StoryBoard1](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_1.jpg?raw=true)
 
 
 # Changes between Storyboard and the Final Implementation
