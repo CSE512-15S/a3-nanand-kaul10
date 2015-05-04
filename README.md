@@ -14,15 +14,18 @@ Data Set - For the purpose of this visualization we took the EPL statistics data
 Data Cleaning - As the original data was in a tabular form, we couldn't use it directly in our code. Thus, we converted this data to the JSON format so that we could readily use/import it in our D3 code and create effective and interactive visualizations. 
 <Name of JSON data file - EplData.JSON>
 
-Interaction Techniques and Reasons - We attempted to incorporate the following interaction techniques in our visualization 
+Interaction Techniques and Reasons - We attempted to incorporate the following interaction techniques in our visualization
+
 1. Mouse Hover
   - We ensured that when the user would hover over the visualization, the bar over which the mouse pointer was present would turn into a different color in order to make viewing of the particular statistic easier for the user. 
   - We also introduced a transition time of 0.3 seconds to ensure smooth transitioning from one bar to another and minimize the abrupt change in color.
   - In order to refer to the value of the bars, we introduced labels at the tip of the bars which would become visible to user on hovering the mouse over the respective bar.
+
 2. Sorting via Mouse Click
   - As an important part of our question was to figure out the top contenders for the title and the teams facing relegation, we incorporated sorting feature so that a user could sort the data/bars in either ascending or descending order and easily decipher which teams belonged to the aforementioned catergories.
   - On the 1st click within the visualization layout, the bars would get sorted in descending order.
   - On the 2nd click within the visualization layout, the bars would get sorted in ascending order.
+
 3. Selection via Buttons
   - In order to visualize and analyse specific statistics for each team such as goals scored, goals conceded, matches won, total points et cetera, we included buttons in our visualization. We ensured that the button labels were self-explanatory and on clicking a specific button, its corresponding statistic would be displayed.
   - We introduced a delay of 1500 ms so that the transitioning of the bars from one window to another became smooth and visually appealing.
@@ -39,9 +42,17 @@ In order to create this interactive visualization we toyed with a couple of dist
 
 ![StoryBoard1](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_1.jpg?raw=true)
 
+Initially we thought of taking the EPL data for all of the 20 teams and creating an interactive line chart visualization for the same. We thought of plotting the team details on the Y axis and the EPL statistics on the X axis. Depending on what statistic a user chose from a given list, the line charts would change and show relevant data.
+
+However, owing to technical limitations we decided to modify or design of the visualization.
+
 ![StoryBoard2](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_2.jpg?raw=true)
 
+We also explored our dataset using bubble charts. Our idea was to plot interactive bubble charts showing each of the 20 teams' statistics such as matches won, matches lost, goals scored et cetera. In order to make our visualization more informative, we thought of including both multiple views for each of the statistic and interactivity on the click/selection of a bubble by a user. 
+
 ![StoryBoard3](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_3.jpg?raw=true)
+
+After much brainstorming, we decided to go with the above design for our visualization. We decided to use D3 to make interactive bar plots for our data based on different statisics. As can be seen from the design, we included buttons to allow users to explore individual statistics and also attempted to include features such as dynamic tool tip and sorting.
 
 # Changes between Storyboard and the Final Implementation
 
