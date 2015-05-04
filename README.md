@@ -39,6 +39,9 @@ In order to create this interactive visualization we toyed with a couple of dist
 
 ![StoryBoard1](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_1.jpg?raw=true)
 
+![StoryBoard2](https://github.com/CSE512-15S/a3-nanand-kaul10/blob/master/story_2.jpg?raw=true)
+
+
 
 # Changes between Storyboard and the Final Implementation
 
