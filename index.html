@@ -2,409 +2,402 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Assignment 3</title>
+                        <style>
+ 
+body {
+  font: 10px sans-serif;
+}
+ 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+ 
+.bar {
+  fill: steelblue;
+}
+ 
+.bar:hover {
+  fill: orangered ;
+}
+ 
+.x.axis path {
+  display: none;
+}
+ 
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  padding-right: 50px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.d3-tip img {
+width: 40px; height: 40px;
+}
+ 
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 8px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+ 
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+</style>
+        <title>D3 Test</title>
         <script type="text/javascript" src="d3.js"></script>
-		<link rel="stylesheet" type="text/css" href="style.css">
-    </head>
+                        <script type="text/javascript" src="index.js"></script>
+ 
+            
+            </head>
+           
+            
     <body>
-	    <script type="text/javascript">		
-		var w = 800;
-		var h = 400;
-		var sortOrder=false;
-		var padding=30;
-		
-		d3.json("premierleague.json",function(error,data){
-		clubname=data["ClubName"];
-		dataset=data["MatchesPlayed"];
-		
-        var xScale = d3.scale.ordinal()
-		.domain(d3.range(dataset.length))
-		.rangeRoundBands([0, w], 0.05);
+             
+        <script type="text/javascript">
+var margin = {top: 300, right: 20, bottom: 10, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+ 
+var formatPercent = d3.format(".0%");
+var sortOrder=false; 
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+ 
+var y = d3.scale.linear()
+    .range([height-150, 0]);
+ 
+//var xAxis = d3.svg.axis()
+  //  .scale(x)
+   // .orient("bottom");
+ 
+var yAxis = d3.svg.axis()
+    .scale(y)
+.orient("left");
 
-		var yScale = d3.scale.linear()
-		.domain([0, d3.max(dataset)])
-		.range([0, h]);
-			
-		//Create SVG element
-		var svg = d3.select("body")
-		.append("svg")
-		.attr("width", w)
-		.attr("height", h);
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  //.offset([-10, 0])
+  .html(function(d) {
+    return "<img style='position: absolute; top: 6px; right:6px;' src="+ d.Logo +"><strong>ClubName:</strong> <span style='color:red'>" + d.ClubName + 
+"</span><br><strong>MatchesPlayed:</strong> <span style='color:red'>" + d.MatchesPlayed + 
+"</span><br><strong>MatchesWon:</strong> <span style='color:red'>" + d.MatchesWon +
+"</span><br><strong>MatchesDrawn:</strong> <span style='color:red'>" + d.MatchesDrawn +
+"</span><br><strong>MatchesLost:</strong> <span style='color:red'>" + d.MatchesLost +
+"</span><br><strong>GoalsScored:</strong> <span style='color:red'>" + d.GoalsScored +
+"</span><br><strong>GoalsConceded:</strong> <span style='color:red'>" + d.GoalsConceded +
+"</span><br><strong>CleanSheets:</strong> <span style='color:red'>" + d.CleanSheets +
+"</span><br><strong>Points:</strong> <span style='color:red'>" + d.Points +
+"</span><br><strong>PointsPerGame:</strong> <span style='color:red'>" + d.PointsPerGame +
+"</span>";
+  })
+ 
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+ 
+svg.call(tip);
+ 
+d3.csv("premier.csv", type, function(error, data) {
+  x.domain(data.map(function(d) { return d.ClubName; }));
+  y.domain([0,d3.max(data, function(d) { return d.MatchesPlayed; })]);
+ 
+  svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      //.text("MatchesPlayed");
+ 
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.ClubName); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.MatchesPlayed); })
+      .attr("height", function(d) { return height - y(d.MatchesPlayed); })
+ .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ ;
+ 
+ 
+  d3.select(".MatchesWon")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+     // .text("MatchesWon");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.MatchesWon); })
+      .attr("height", function(d) { return height - y(d.MatchesWon); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
-		//Create bars
-		svg.selectAll("rect")
-		.data(dataset)
-		.enter()
-		.append("rect")
-		.attr("x", function(d, i) {
-		return xScale(i);
-		})
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("width", xScale.rangeBand())
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		for(var i=0;i<dataset.length;i++){
-		return "rgb(0, 0, " + (d*10) + ")";
-		}
-		})
-		.on("mouseover", function(d) {
-		//Get this bar's x/y values, then augment for the tooltip
-		var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.rangeBand() / 2;
-		var yPosition = parseFloat(d3.select(this).attr("y")) + 14;
 
-		//Create the tooltip label
-		svg.append("text")
-		.attr("id", "tooltip")
-		.attr("x", xPosition)
-		.attr("y", yPosition)
-		.attr("text-anchor", "middle")
-		.attr("font-family", "sans-serif")
-		.attr("font-size", "11px")
-		.attr("font-weight", "bold")
-		.attr("fill", "black")
-		.text(d);	 
-        })
-		.on("mouseout", function() {
-		//Remove the tooltip
-		d3.select("#tooltip").remove();			
-		})
-		.on("click",function(){
-		sortBars();
-		});
-			   
+ 
+ });
+ 
+ d3.select(".MatchesPlayed")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+     // .text("MatchesWon");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.MatchesPlayed); })
+      .attr("height", function(d) { return height - y(d.MatchesPlayed); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//On click, update with new data			
-		d3.select(".MatchesWon")
-		.on("click", function() {
 
-		//New values for dataset
-		dataset = data["MatchesWon"];
-		yScale.domain([0,d3.max(dataset)]);
+ 
+ });
+ 
+   d3.select(".MatchesDrawn")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      //.text("MatchesDrawn");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.MatchesDrawn); })
+      .attr("height", function(d) { return height - y(d.MatchesDrawn); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//Update all rects
-		svg.selectAll("rect")
-		.data(dataset)
-		.transition()
-		.duration(1500)
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-		});
 
-		//Update all labels
-		svg.selectAll("text")
-		.data(dataset)
-		.transition()
-		.duration(1100)
-		.ease("linear")
-		.text(function(d) {
-		return d;
-		})
-		.attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-		})
-		.attr("y", function(d) {
-		return h - yScale(d) + 14;
-		});
-				   				
-		});
-				
-				
-		//On click, update with new data			
-		d3.select(".MatchesDrawn")
-		.on("click", function() {
+ 
+ });
+ 
+   d3.select(".MatchesLost")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      //.text("MatchesLost");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.MatchesLost); })
+      .attr("height", function(d) { return height - y(d.MatchesLost); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//New values for dataset
-		dataset = data["MatchesDrawn"];
-		yScale.domain([0,d3.max(dataset)]);
 
-		//Update all rects
-		svg.selectAll("rect")
-		.data(dataset)
-		.transition()
-		.duration(1500)
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-		});
+ 
+ });
+ 
+   d3.select(".GoalsScored")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      //.text("GoalsScored");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.GoalsScored); })
+      .attr("height", function(d) { return height - y(d.GoalsScored); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
-		//Update all labels
-		svg.selectAll("text")
-		.data(dataset)
-		.transition()
-		.duration(1100)
-		.ease("linear")
-		.text(function(d) {
-		return d;
-		})
-		.attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-		})
-		.attr("y", function(d) {
-		return h - yScale(d) + 14;
-		});
-					   				
-		});
-				
-		//On click, update with new data			
-		d3.select(".MatchesLost")
-		.on("click", function() {
+ 
+ });
+ 
+   d3.select(".GoalsConceded")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+     // .text("GoalsConceded");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.GoalsConceded); })
+      .attr("height", function(d) { return height - y(d.GoalsConceded); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//New values for dataset
-		dataset = data["MatchesLost"];
-		yScale.domain([0,d3.max(dataset)]);
 
-		//Update all rects
-		svg.selectAll("rect")
-		.data(dataset)
-		.transition()
-		.duration(1500)
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-		});
+ 
+ });
+ 
+   d3.select(".CleanSheets")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+     // .text("CleanSheets");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.CleanSheets); })
+      .attr("height", function(d) { return height - y(d.CleanSheets); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//Update all labels
-		svg.selectAll("text")
-		.data(dataset)
-		.transition()
-		.duration(1100)
-		.ease("linear")
-		.text(function(d) {
-		return d;
-		})
-		.attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-		})
-		.attr("y", function(d) {
-		return h - yScale(d) + 14;
-		});
-			   				
-		});
-				
-				
-		//On click, update with new data			
-		d3.select(".GoalsFor")
-		.on("click", function() {
 
-		//New values for dataset
-		dataset = data["GoalsFor"];
-		yScale.domain([0,d3.max(dataset)]);
+ 
+ });
+ 
+   d3.select(".Points")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      //.text("Points");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.Points); })
+      .attr("height", function(d) { return height - y(d.Points); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//Update all rects
-		svg.selectAll("rect")
-		.data(dataset)
-		.transition()
-		.duration(1500)
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-		});
+ 
+ });
+ 
+   d3.select(".PointsPerGame")
+.on('click', function() {
+svg.append("g")
+      .attr("class", "y axis")
+      //.call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      //.text("PointsPerGame");
+ 
+svg.call(tip);
+ 
+ svg.selectAll(".bar")
+      .data(data).transition().duration(1500)
+      .attr("y", function(d) { return y(d.PointsPerGame); })
+      .attr("height", function(d) { return height - y(d.PointsPerGame); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+ 
 
-		//Update all labels
-		svg.selectAll("text")
-		.data(dataset)
-		.transition()
-		.duration(1100)
-		.ease("linear")
-		.text(function(d) {
-		return d;
-		})
-		.attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-		})
-		.attr("y", function(d) {
-		return h - yScale(d) + 14;
-		});
-				   				
-		});
-				
-		//On click, update with new data			
-		d3.select(".GoalsAgainst")
-		.on("click", function() {
+ 
+ });
 
-		//New values for dataset
-		dataset = data["GoalsAgainst"];
-		yScale.domain([0,d3.max(dataset)]);
 
-		//Update all rects
-		svg.selectAll("rect")
-		.data(dataset)
-		.transition()
-		.duration(1500)
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-		});
+ 
+});
+ 
+function type(d) {
+  d.MatchesPlayed = +d.MatchesPlayed;
+  d.ClubName=d.ClubName;
+  return d;
+}
 
-		//Update all labels
-		svg.selectAll("text")
-		.data(dataset)
-		.transition()
-		.duration(1100)
-		.ease("linear")
-		.text(function(d) {
-		return d;
-		})
-		.attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-		})
-		.attr("y", function(d) {
-		return h - yScale(d) + 14;
-		});
-					   				
-		});
-				
-				
-				
-				
-		//On click, update with new data			
-		d3.select(".Points")
-		.on("click", function() {
-
-		//New values for dataset
-		dataset = data["Points"];
-		yScale.domain([0,d3.max(dataset)]);
-
-		//Update all rects
-		svg.selectAll("rect")
-		.data(dataset)
-		.transition()
-		.duration(1500)
-		.attr("y", function(d) {
-		return h - yScale(d);
-		})
-		.attr("height", function(d) {
-		return yScale(d);
-		})
-		.attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-		});
-
-		//Update all labels
-		svg.selectAll("text")
-		.data(dataset)
-	    .transition()
-	    .duration(1100)
-	    .ease("linear")
-	    .text(function(d) {
-		return d;
-	    })
-	    .attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-	    })
-	    .attr("y", function(d) {
-		return h - yScale(d) + 14;
-	    });
-					   				
-		});
-				
-				
-				
-		//On click, update with new data			
-		d3.select(".MatchesPlayed")
-		.on("click", function() {
-
-		//New values for dataset
-		dataset = data["MatchesPlayed"];
-		yScale.domain([0,d3.max(dataset)]);
-
-		//Update all rects
-		svg.selectAll("rect")
-	    .data(dataset)
-	    .transition()
-	    .duration(1500)
-	    .attr("y", function(d) {
-		return h - yScale(d);
-	    })
-	    .attr("height", function(d) {
-		return yScale(d);
-	    })
-	    .attr("fill", function(d) {
-		return "rgb(0, 0, " + (d * 10) + ")";
-	    });
-
-		//Update all labels
-		svg.selectAll("text")
-	    .data(dataset)
-	    .transition()
-	    .duration(1100)
-	    .ease("linear")
-	    .text(function(d) {
-		return d;
-	    })
-	    .attr("x", function(d, i) {
-		return xScale(i) + xScale.rangeBand() / 2;
-	    })
-	    .attr("y", function(d) {
-		return h - yScale(d) + 14;
-	    });
-					   				
-		});
-				
-			
-		var sortBars=function(){
-		sortOrder=!sortOrder;
-		svg.selectAll("rect")
-		.sort(function(a,b){
-		if(sortOrder){
-		return d3.ascending(a,b);
-		}
-		else{
-		return d3.descending(a,b);}
-		})
-		.transition()
-		.delay(function(d,i){
-		return i*50;
-		})
-		.duration(1000)
-		.attr("x",function(d,i){
-		return xScale(i);
-		});
-		};
-		})
-		
-		</script>
+ 
+ 
+        </script>
 	<h1><b>English Premier League - Team Performance Analysis</b></h1>
 	<h2><i>Season 2014 - 2015</i></h2>
 	<h4>Data Courtesy - <a href="http://www.statto.com/football/stats/england/premier-league/2014-2015/table">Statto - EPL Data</a></h4>
 	<hr>
-	<button class="MatchesPlayed">Matches Played</button>
+	<button class="MatchesPlayed" style="margin-left: 80px">Matches Played</button>
 	<button class="MatchesWon">Matches Won</button>
 	<button class="MatchesDrawn">Matches Drawn</button>
 	<button class="MatchesLost">Matches Lost</button>
-	<button class="GoalsFor">Goals Scored</button>
-	<button class="GoalsAgainst">Goals Conceded</button>
+	<button class="GoalsScored">Goals Scored</button>
+	<button class="GoalsConceded">Goals Conceded</button>
+	<button class="CleanSheets">Clean Sheets</button>
 	<button class="Points">Total Points</button>
 	<hr>
-	</body>
-</html> 
+    </body>
+</html>
