@@ -11,13 +11,13 @@ Since the EPL season is currently in progress and very much in news, it got us i
 
 **Data Set** - For the purpose of this visualization we took the EPL statistics data from http://www.statto.com/football/stats/england/premier-league/2014-2015/table. It gives a tabular representation of the statistics which makes it a little hard for a casual observer to comprehend how different teams are performing individually and also with respect to others. This was also one of the motivations for us to work with this dataset and make it visually appealing and effective.
 
-**Data Cleaning** - As the original data was in a tabular form, we couldn't use it directly in our code. Thus, we converted this data to the JSON format so that we could readily use/import it in our D3 code and create effective and interactive visualizations. 
+**Data Cleaning** - Since our data was in tabular format we preferred using a csv file to import all our data in order to carry out the visualization effectively. 
 
 **Interaction Techniques and Reasons** - We attempted to incorporate the following interaction techniques in our visualization
 
 1. **Mouse Hover**
   - We ensured that when the user would hover over the visualization, the bar over which the mouse pointer was present would turn into a different color in order to make viewing of the particular statistic easier for the user. 
-  - We also introduced a transition time of 0.3 seconds to ensure smooth transitioning from one bar to another and minimize the abrupt change in color.
+  - We also introduced a transition time to ensure smooth transitioning from one bar to another and minimize the abrupt change in color.
   - In order to refer to the value of the bars, we introduced tooltip at the tip of the bars which would become visible to user on hovering the mouse over the respective bar.
 
 2. **Selection via Buttons**
