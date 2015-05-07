@@ -18,22 +18,17 @@ Since the EPL season is currently in progress and very much in news, it got us i
 1. **Mouse Hover**
   - We ensured that when the user would hover over the visualization, the bar over which the mouse pointer was present would turn into a different color in order to make viewing of the particular statistic easier for the user. 
   - We also introduced a transition time of 0.3 seconds to ensure smooth transitioning from one bar to another and minimize the abrupt change in color.
-  - In order to refer to the value of the bars, we introduced labels at the tip of the bars which would become visible to user on hovering the mouse over the respective bar.
+  - In order to refer to the value of the bars, we introduced tooltip at the tip of the bars which would become visible to user on hovering the mouse over the respective bar.
 
-2. **Sorting via Mouse Click**
-  - As an important part of our question was to figure out the top contenders for the title and the teams facing relegation, we incorporated sorting feature so that a user could sort the data/bars in either ascending or descending order and easily decipher which teams belonged to the aforementioned catergories.
-  - On the 1st click within the visualization layout, the bars would get sorted in descending order.
-  - On the 2nd click within the visualization layout, the bars would get sorted in ascending order.
-
-3. **Selection via Buttons**
+2. **Selection via Buttons**
   - In order to visualize and analyse specific statistics for each team such as goals scored, goals conceded, matches won, total points et cetera, we included buttons in our visualization. We ensured that the button labels were self-explanatory and on clicking a specific button, its corresponding statistic would be displayed.
   - We introduced a delay of 1500 ms so that the transitioning of the bars from one window to another became smooth and visually appealing.
 
-**The Final Visualization** - We have implemented a multi-view interactive visualization for the EPL Season 2014-2015 teams performance statistics. Users can explore different performance statisics by clicking on respective buttons in the visualization window. Within a particular statistic plot or window, users can sort the data in ascending or descending order to analyse it from varied perspectives. Users can also get the actual value of a statistic for a particular team by hovering over the corresponding bar which would not only display the value but also change the color of the bar.
+**The Final Visualization** - We have implemented a multi-view interactive visualization for the EPL Season 2014-2015 teams performance statistics. Users can explore different performance statisics by clicking on respective buttons in the visualization window. Users can also get the actual value of a statistic for a particular team by hovering over the corresponding bar which would not only display the value but also change the color of the bar.
 
 # Running Instructions
 
-Access our visualization at http://cse512-15s.github.io/a3-nanand-kaul10/ or download this repository and run python -m SimpleHTTPServer 8888 and access this from http://localhost:8888/.
+Download this repository and run python -m SimpleHTTPServer 8888 and access this from http://localhost:8888/.
 
 # Story Board
 
@@ -55,11 +50,11 @@ After much brainstorming, we decided to go with the above design for our visuali
 
 # Changes between Storyboard and the Final Implementation
 
-There wasn't much change between our final storyboard and our implementation. In a way, our storyboard guided our implementation. 
+Our storyboard guided our implementation. Having said that, we did change the placement of buttons on our visualization. We also modified some of the button labels from what we had thought earlier. Another addition to our actual implementation was, including time delays between button clicks and changing the color of the selected bar in a chosen bar chart. 
 
-Having said that, we did change the placement of buttons on our visualization. We also modified some of the button labels from what we had thought earlier. Another addition to our actual implementation was, including time delays between button clicks and changing the color of the selected bar in a chosen bar chart. 
-
-Note - We attempted to incorporate a tool-tip in our visualization to display team details but owing to technical limitations we couldn't implement it.
+Note - 
+1. We had planned to include sorting feature for bars on mouse-click. However, we couldn't implement the same. 
+2. We also modified our older visualization (submitted on May 4, 2015) and were able to implement tool-tip for bars in this current visualization. This solved our earlier problem of not being able to distinguish which bar represented which club in the visualization. The tooltip now contains all the relevant information for each club and for each statistic. It also contains an image of the club logo for those interested. These are the additional features that we have added.
 
 # Development Process
 
@@ -106,7 +101,7 @@ Below is the approximate time we spent per person on building the interactive vi
 - Implementing interaction features such as tool-tip
 
 **Limitation**
-- Due to technical limitations, we were not able to implement our initial idea of tooltip showing EPL team details over the bars in the charts
+- We have used a library called d3-tip for tooltip functionality as a result of which our code throws some error in console, but it still displays all the relevant information that we want in our visualization.
 
 **Reference**
 - We used 'Interactive Data Visualization for the Web' by Scott Murray as reference for our code.
