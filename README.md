@@ -101,7 +101,7 @@ Below is the approximate time we spent per person on building the interactive vi
 - Implementing interaction features such as tool-tip
 
 **Limitation**
-- We have used a library called d3-tip for tooltip functionality as a result of which our code throws some error in console, but it still displays all the relevant information that we want in our visualization.
+- We would have liked to sort the bars in ascending or descending order in order to compare the teams at the top of the league or at the bottom, however due to technical limitations we could not implement the same.
 
 **Reference**
 - We used 'Interactive Data Visualization for the Web' by Scott Murray as reference for our code.
